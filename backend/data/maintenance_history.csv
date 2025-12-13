@@ -1,0 +1,6 @@
+vehicle_id,last_issue,repair_cost,days_ago
+V002,Brake Pad Replacement,4500,300
+V003,Brake Disc Wear,7000,280
+V005,Brake Pad Replacement,5000,320
+V007,Brake Pad Replacement,4800,270
+V009,Brake Disc Failure,9000,340

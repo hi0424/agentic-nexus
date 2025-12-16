@@ -30,11 +30,15 @@ AutoAI implements a closed-loop predictive maintenance workflow where AI agents:
 5. Generate RCA/CAPA insights for manufacturing  
 6. Continuously monitor agent behavior using UEBA principles  
 
+The workflow mirrors **real-world OEM aftersales processes**, including early warning detection, proactive customer engagement, and service center coordination.
+
 All decisions are coordinated by a **Master Agent**, with specialized **Worker Agents** executing domain-specific tasks.
 
 ---
 
 ## Agentic Architecture
+
+Agent execution, state transitions, and decision flow are orchestrated using **LangGraph**, enabling deterministic and explainable multi-agent workflows.
 
 ### Master Agent (Orchestrator)
 - Controls end-to-end workflow
@@ -47,7 +51,7 @@ All decisions are coordinated by a **Master Agent**, with specialized **Worker A
 |------|----------------|
 | Data Analysis Agent | Analyzes telematics and historical data |
 | Diagnosis Agent | Predicts failure type and priority |
-| Customer Engagement Agent | Explains issues and recommends service |
+| Customer Engagement Agent | Explains predicted failures in natural language and persuades customers to book preventive service |
 | Scheduling Agent | Proposes and confirms service appointments |
 | Feedback Agent | Captures post-service feedback |
 | Manufacturing Insights Agent | Generates RCA/CAPA insights |
@@ -116,16 +120,16 @@ agentic-nexus/
 │   ├── agents/        # Master & Worker agent logic
 │   ├── graph/         # LangGraph workflow
 │   ├── data/          # Synthetic datasets
-│   ├── services/      # Scheduler API & Telematics
+│   ├── services/      # Scheduler & telematics mocks
 │   ├── ueba/          # Security layer
 │   └── main.py        # FastAPI entrypoint
 ├── frontend/
 │   └── dashboard.py   # Demo dashboard
 ├── requirements.txt
 └── README.md
-
 ```
 ---
+
 ## Running the Demo
 ```bash
 git clone https://github.com/hi0424/agentic-nexus.git

@@ -1,65 +1,107 @@
-# 🚗 AutoAI: Agentic AI for Predictive Vehicle Maintenance
+# AutoAI: Agentic Predictive Maintenance Platform  
+EY Techathon 6.0 | Round 2 Submission
 
-AutoAI is a **LangGraph-orchestrated, multi-agent AI system** that demonstrates how autonomous agents can be used to predict vehicle failures, engage customers, schedule service, and generate manufacturing insights — all while being monitored by a **UEBA-style security layer**.
+AutoAI is an **agentic AI prototype** for predictive vehicle maintenance, designed to demonstrate how autonomous AI agents can be orchestrated, secured, and monitored in an automotive ecosystem.
 
-This project focuses on **system design, agent orchestration, and secure AI workflows**, not model training or frontend polish.
-
----
-
-## What this project demonstrates
-
-- Agentic AI orchestration using **LangGraph**
-- Master–Worker agent architecture
-- Autonomous decision flow (no hardcoded scripts)
-- UEBA-style behavioral monitoring for AI agents
-- End-to-end AI system integration (data → decision → action → feedback)
+The project focuses on **agentic orchestration, security (UEBA), and realistic system workflows**, in line with EY Techathon evaluation criteria.
 
 ---
 
-## System Architecture
+## Problem Context
 
-### Master Agent
-- Controls overall workflow
-- Decides escalation and engagement
-- Enforces security boundaries
-- Coordinates all worker agents
+Automotive maintenance workflows today face multiple challenges:
+- Failures are detected reactively rather than predictively
+- Customer engagement and service scheduling are largely manual
+- Aftersales insights rarely feed back into manufacturing
+- Autonomous AI systems lack behavioral security monitoring
+
+AutoAI explores how **agentic AI systems** can address these gaps through autonomous, explainable workflows.
+
+---
+
+## Solution Overview
+
+AutoAI implements a closed-loop predictive maintenance workflow where AI agents:
+
+1. Monitor vehicle telematics and maintenance history  
+2. Predict component failures and urgency  
+3. Decide whether customer engagement is required  
+4. Initiate service scheduling autonomously  
+5. Generate RCA/CAPA insights for manufacturing  
+6. Continuously monitor agent behavior using UEBA principles  
+
+All decisions are coordinated by a **Master Agent**, with specialized **Worker Agents** executing domain-specific tasks.
+
+---
+
+## Agentic Architecture
+
+### Master Agent (Orchestrator)
+- Controls end-to-end workflow
+- Decides escalation paths
+- Coordinates worker agents
+- Enforces security and access boundaries
 
 ### Worker Agents
 | Agent | Responsibility |
-|-----|----------------|
-| Data Analysis Agent | Processes vehicle telemetry & history |
+|------|----------------|
+| Data Analysis Agent | Analyzes telematics and historical data |
 | Diagnosis Agent | Predicts failure type and priority |
-| Customer Engagement Agent | AI-driven service conversation |
-| Scheduling Agent | Books service appointments |
+| Customer Engagement Agent | Explains issues and recommends service |
+| Scheduling Agent | Proposes and confirms service appointments |
 | Feedback Agent | Captures post-service feedback |
-| Manufacturing Insights Agent | RCA / CAPA generation |
-
-### UEBA Security Layer
-- Establishes behavioral baselines for agents
-- Detects anomalous or unauthorized actions
-- Demonstrated via controlled policy violation
+| Manufacturing Insights Agent | Generates RCA/CAPA insights |
 
 ---
 
-## End-to-End Flow
+## UEBA Security Layer
 
-1. Vehicle telemetry ingested  
-2. Failure risk predicted  
-3. Master Agent decides action  
-4. Customer engaged via AI  
-5. Service scheduled autonomously  
-6. UEBA detects abnormal agent behavior (edge case)  
-7. RCA insights fed back to manufacturing  
+AutoAI integrates a **UEBA-style security layer** to monitor AI agent behavior.
+
+- Establishes behavioral baselines for each agent
+- Detects anomalous or unauthorized actions
+- Prevents agents from accessing resources outside their scope
+
+**Demonstration scenario:**  
+For vehicle `V004`, the Scheduling Agent intentionally attempts an unauthorized telematics access, which is detected and flagged by UEBA.  
+All other vehicles operate under normal behavioral baselines.
+
+This demonstrates **behavior-based security**, not hardcoded alerts.
+
+---
+
+## End-to-End Demonstration Flow
+
+1. Synthetic vehicle telemetry ingested  
+2. Failure risk predicted by agents  
+3. Master Agent decides next action  
+4. Customer engagement triggered (if required)  
+5. Service scheduling executed autonomously  
+6. UEBA monitors and flags anomalous agent behavior  
+7. RCA/CAPA insights generated for manufacturing teams  
+
+---
+
+## Data & System Assumptions
+
+- Synthetic vehicle data for multiple vehicles
+- Mock telematics feed
+- Dummy maintenance history records
+- Simulated service center scheduling
+- Rule-based predictive logic for failure estimation
+- UEBA behavior simulation for agent monitoring
+
+The goal is to demonstrate **system realism**, not production deployment.
 
 ---
 
 ## Tech Stack
 
 | Layer | Technology |
-|-----|------------|
+|------|------------|
 | Agent Orchestration | LangGraph |
 | Backend API | FastAPI |
-| UI / Demo | Streamlit |
+| Frontend (Demo UI) | Streamlit |
 | Data Processing | Pandas |
 | Security | UEBA (behavioral simulation) |
 | Language | Python |
@@ -70,17 +112,40 @@ This project focuses on **system design, agent orchestration, and secure AI work
 
 ```bash
 agentic-nexus/
-│
 ├── backend/
 │   ├── agents/        # Master & Worker agent logic
 │   ├── graph/         # LangGraph workflow
-│   ├── data/          # Synthetic vehicle datasets
+│   ├── data/          # Synthetic datasets
 │   ├── services/      # Scheduler API & Telematics
-│   ├── ueba/          # Security Layer
-│   ├── main.py        # FastAPI entrypoint
-│
+│   ├── ueba/          # Security layer
+│   └── main.py        # FastAPI entrypoint
 ├── frontend/
-│   ├── dashboard.py   # Figma-aligned Streamlit UI
-│
+│   └── dashboard.py   # Demo dashboard
 ├── requirements.txt
-├── README.md
+└── README.md
+
+```
+---
+## Running the Demo
+```bash
+git clone https://github.com/hi0424/agentic-nexus.git
+cd agentic-nexus
+
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+
+pip install -r requirements.txt
+uvicorn backend.main:app --reload
+```
+```bash
+cd frontend
+streamlit run dashboard.py
+```
+---
+
+## Team
+Built by a student team focused on:
+- Agentic AI system design
+- Backend orchestration
+- Data-driven workflows
+- UX-to-engineering translation

@@ -104,11 +104,11 @@ The goal is to demonstrate **system realism**, not production deployment.
 | Layer | Technology |
 |------|------------|
 | Agent Orchestration | LangGraph |
-| Backend API | FastAPI |
-| Frontend (Demo UI) | Streamlit |
-| Data Processing | Pandas |
+| Backend | Python, FastAPI |
+| Frontend | React, TypeScript, Tailwind CSS |
+| Data Processing | CSV-based synthetic datasets, Pandas |
 | Security | UEBA (behavioral simulation) |
-| Language | Python |
+| APIs | Mock Telematics API, Mock Service Scheduling API|
 
 ---
 
@@ -159,4 +159,5 @@ Built by a student team focused on:
 - Backend orchestration
 - Data-driven workflows
 - UX-to-engineering translation
+
 

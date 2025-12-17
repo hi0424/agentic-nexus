@@ -12,4 +12,3 @@ def get_telematics(vehicle_id: str):
         "brake_wear": brake_wear,
         "timestamp": time.time()
     }
-

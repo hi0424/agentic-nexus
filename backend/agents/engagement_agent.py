@@ -1,13 +1,24 @@
 class CustomerEngagementAgent:
     def converse(self, diagnosis, user_response="ACCEPT"):
+        if diagnosis["days_to_failure"] <= 3:
+            tone = "URGENT"
+            risk = "Immediate safety risk detected."
+        else:
+            tone = "ADVISORY"
+            risk = "Performance degradation expected soon."
+        
         explanation = (
-            f"⚠️ Brake failure predicted in {diagnosis['days_to_failure']} days. "
-            "Driving further may be unsafe."
+        f"⚠️ {risk} Failure predicted in "
+        f"{diagnosis['days_to_failure']} days."
         )
 
-        if user_response == "DECLINE":
-            follow_up = "Delaying service may increase risk. Would tomorrow work?"
-        else:
-            follow_up = "Shall I schedule a service appointment now?"
-
-        return explanation + " " + follow_up
+        follow_up = (
+        "Would you like me to schedule service now?"
+        if user_response == "ACCEPT"
+        else "Delaying may increase repair cost. Reschedule?"
+       )
+    
+        return {
+        "tone": tone,
+        "message": explanation + " " + follow_up
+      }

@@ -7,12 +7,15 @@ import { Input } from './ui/input'
 import { Badge } from './ui/badge'
 import { Mic, MicOff, Send, Volume2, VolumeX } from 'lucide-react'
 
+/* ===============================
+   TYPES
+================================ */
 interface Message {
   id: string
   role: 'agent' | 'user'
   content: string
   timestamp: string
-  type?: 'info' | 'urgent' | 'decision'
+  type?: 'info' | 'urgent' | 'decision' | 'security'
 }
 
 interface DecisionTrace {
@@ -20,8 +23,12 @@ interface DecisionTrace {
   risk: string
   recommendation: string
   agents: string[]
+  manufacturingFeedback: string
 }
 
+/* ===============================
+   COMPONENT
+================================ */
 export function VoiceAgent({
   selectedVehicle,
 }: {
@@ -38,7 +45,7 @@ export function VoiceAgent({
   const [speaking, setSpeaking] = useState(false)
 
   /* ===============================
-     CORE INTELLIGENCE
+     CORE AGENTIC INTELLIGENCE
   =============================== */
   useEffect(() => {
     if (!selectedVehicle) {
@@ -48,7 +55,7 @@ export function VoiceAgent({
           role: 'agent',
           type: 'info',
           content:
-            'Please select a vehicle from the dashboard to begin analysis.',
+            'Please select a vehicle from the dashboard to begin real-time analysis.',
           timestamp: now(),
         },
       ])
@@ -60,43 +67,59 @@ export function VoiceAgent({
     const diagnosis = run.diagnosis
     const health = selectedVehicle.healthScore
 
-    let severity: 'info' | 'urgent' = 'info'
-    if (health < 45 || diagnosis?.priority === 'HIGH') severity = 'urgent'
+    const urgent =
+      health < 45 || diagnosis?.priority === 'HIGH'
 
     const intro: Message = {
       id: 'intro',
       role: 'agent',
-      type: severity,
+      type: urgent ? 'urgent' : 'info',
       content: `Vehicle ${selectedVehicle.id} analysis complete.
 
 Current Health Score: ${health}%.
 
 ${
-  severity === 'urgent'
-    ? '⚠️ Immediate attention recommended to avoid breakdown or downtime.'
-    : 'Vehicle is operational, but early wear indicators are present.'
-}`,
+  urgent
+    ? '⚠️ A high-risk issue has been detected. Delaying service may lead to sudden breakdowns and increased repair costs.'
+    : 'Early wear indicators detected. Addressing this early can help prevent future downtime.'
+}
+
+Would you like me to schedule a service appointment now?`,
       timestamp: now(),
     }
+
+    const uebaNotice: Message | null = urgent
+      ? {
+          id: 'ueba-notice',
+          role: 'agent',
+          type: 'security',
+          content:
+            '🔐 UEBA Active: Elevated-risk workflow detected. All agent actions are being monitored for abnormal behaviour.',
+          timestamp: now(),
+        }
+      : null
 
     const decisionTrace: DecisionTrace = {
       summary:
         diagnosis?.failure ??
         'No critical failure detected at this time.',
-      risk:
-        severity === 'urgent'
-          ? 'High probability of failure within the next operational window.'
-          : 'Gradual degradation expected over time.',
-      recommendation:
-        severity === 'urgent'
-          ? 'Schedule service within the next 72 hours.'
-          : 'Monitor vehicle and set a preventive maintenance reminder.',
+      risk: urgent
+        ? 'High probability of failure within the next operating cycle.'
+        : 'Gradual degradation expected over time.',
+      recommendation: urgent
+        ? 'Schedule service within the next 72 hours.'
+        : 'Continue monitoring and plan preventive maintenance.',
       agents: [
+        'Master Agent',
+        'Data Analysis Agent',
         'Diagnosis Agent',
         'Scheduling Agent',
         'UEBA Monitor',
-        diagnosis?.priority ? 'Manufacturing Feedback Agent' : '',
-      ].filter(Boolean),
+      ],
+      manufacturingFeedback:
+        diagnosis?.priority === 'HIGH'
+          ? 'Recurring failure pattern logged for RCA/CAPA analysis and manufacturing quality review.'
+          : 'No manufacturing escalation required at this stage.',
     }
 
     const action: Message = {
@@ -107,15 +130,38 @@ ${
       timestamp: now(),
     }
 
-    setMessages([intro, action])
+    setMessages(
+      uebaNotice ? [intro, uebaNotice, action] : [intro, action]
+    )
     setDecision(decisionTrace)
   }, [selectedVehicle?.id])
 
   /* ===============================
-     USER CHAT
+     USER CONVERSATION HANDLING
   =============================== */
   const sendMessage = () => {
     if (!input.trim()) return
+
+    const userText = input.toLowerCase()
+    let agentResponse =
+      'Understood. Re-evaluating risk and coordinating with internal agents.'
+
+    if (userText.includes('yes') || userText.includes('book')) {
+      agentResponse =
+        '✅ Service confirmed. The Scheduling Agent has booked the earliest available slot based on service center capacity.'
+    } else if (
+      userText.includes('later') ||
+      userText.includes('not now')
+    ) {
+      agentResponse =
+        '⏳ No problem. I’ll continue monitoring the vehicle and remind you if risk levels increase.'
+    } else if (
+      userText.includes('raw data') ||
+      userText.includes('sensor access')
+    ) {
+      agentResponse =
+        '🚫 UEBA Alert: This request is outside permitted access patterns and has been blocked for security compliance.'
+    }
 
     setMessages((prev) => [
       ...prev,
@@ -128,9 +174,11 @@ ${
       {
         id: `${Date.now()}-agent`,
         role: 'agent',
-        type: 'info',
-        content:
-          'Understood. Re-evaluating risk and coordinating with internal agents.',
+        type:
+          agentResponse.startsWith('🚫')
+            ? 'security'
+            : 'info',
+        content: agentResponse,
         timestamp: now(),
       },
     ])
@@ -149,13 +197,21 @@ ${
         <Card className="p-8 bg-card/50 border-border/50">
           <div className="flex flex-col items-center gap-6">
             <AIAvatar isActive={voice || speaking} />
-            <h3 className="text-primary">Autonomous Service Agent</h3>
+            <h3 className="text-primary">
+              Autonomous Service Agent
+            </h3>
 
             <div className="flex gap-2 w-full">
-              <Button onClick={() => setVoice(!voice)} className="flex-1">
+              <Button
+                onClick={() => setVoice(!voice)}
+                className="flex-1"
+              >
                 {voice ? <Mic /> : <MicOff />}
               </Button>
-              <Button onClick={() => setSpeaking(!speaking)} className="flex-1">
+              <Button
+                onClick={() => setSpeaking(!speaking)}
+                className="flex-1"
+              >
                 {speaking ? <Volume2 /> : <VolumeX />}
               </Button>
             </div>
@@ -172,7 +228,9 @@ ${
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex ${
-                    m.role === 'user' ? 'justify-end' : 'justify-start'
+                    m.role === 'user'
+                      ? 'justify-end'
+                      : 'justify-start'
                   }`}
                 >
                   <div
@@ -181,10 +239,14 @@ ${
                         ? 'bg-accent/30 border border-accent'
                         : m.type === 'decision'
                         ? 'bg-secondary/20 border border-secondary'
+                        : m.type === 'security'
+                        ? 'bg-destructive/20 border border-destructive'
                         : 'bg-muted/50'
                     }`}
                   >
-                    <p className="text-sm whitespace-pre-line">{m.content}</p>
+                    <p className="text-sm whitespace-pre-line">
+                      {m.content}
+                    </p>
                     <p className="text-xs text-muted-foreground mt-1">
                       {m.timestamp}
                     </p>
@@ -196,20 +258,32 @@ ${
             {decision && (
               <div className="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/30">
                 <h4 className="text-primary mb-2">
-                  🧠 Decision Trace <Badge variant="outline">Explainable AI</Badge>
+                  🧠 Decision Trace{' '}
+                  <Badge variant="outline">
+                    Explainable AI
+                  </Badge>
                 </h4>
                 <p className="text-xs mb-1">
-                  <strong>Summary:</strong> {decision.summary}
+                  <strong>Summary:</strong>{' '}
+                  {decision.summary}
                 </p>
                 <p className="text-xs mb-1">
-                  <strong>Risk:</strong> {decision.risk}
+                  <strong>Risk:</strong>{' '}
+                  {decision.risk}
                 </p>
                 <p className="text-xs mb-1">
-                  <strong>Recommendation:</strong> {decision.recommendation}
+                  <strong>Recommendation:</strong>{' '}
+                  {decision.recommendation}
                 </p>
-                <p className="text-xs">
+                <p className="text-xs mb-1">
                   <strong>Agents Involved:</strong>{' '}
                   {decision.agents.join(', ')}
+                </p>
+                <p className="text-xs">
+                  <strong>
+                    Manufacturing Feedback:
+                  </strong>{' '}
+                  {decision.manufacturingFeedback}
                 </p>
               </div>
             )}
@@ -219,8 +293,10 @@ ${
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask why, what if, or next steps…"
-              onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+              placeholder="Ask why, book service, or test UEBA access…"
+              onKeyDown={(e) =>
+                e.key === 'Enter' && sendMessage()
+              }
             />
             <Button onClick={sendMessage}>
               <Send />
@@ -232,6 +308,9 @@ ${
   )
 }
 
+/* ===============================
+   UTILS
+================================ */
 function now() {
   return new Date().toLocaleTimeString([], {
     hour: '2-digit',

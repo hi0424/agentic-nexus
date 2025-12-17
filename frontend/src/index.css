@@ -65,7 +65,7 @@
   :root, :host {
     --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --color-gray-100: oklch(.967 .003 264.542);
+    --color-gray-100: transparent;
     --color-white: #fff;
     --spacing: .25rem;
     --container-2xl: 42rem;
@@ -267,7 +267,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     ::placeholder {
-      color: color-mix(in oklab, currentColor 50%, transparent);
+      color: rgba( currentColor 50%,  transparent);
     }
   }
 
@@ -359,7 +359,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     * {
-      outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+      outline-color: rgba( var(--ring) 50%,  transparent);
     }
   }
 
@@ -370,7 +370,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     * {
-      outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+      outline-color: rgba( var(--ring) 50%,  transparent);
     }
   }
 
@@ -1034,7 +1034,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .border-accent\/20 {
-      border-color: color-mix(in oklab, var(--accent) 20%, transparent);
+      border-color: rgba( var(--accent) 20%,  transparent);
     }
   }
 
@@ -1044,7 +1044,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .border-accent\/30 {
-      border-color: color-mix(in oklab, var(--accent) 30%, transparent);
+      border-color: rgba( var(--accent) 30%,  transparent);
     }
   }
 
@@ -1054,7 +1054,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .border-accent\/40 {
-      border-color: color-mix(in oklab, var(--accent) 40%, transparent);
+      border-color: rgba( var(--accent) 40%,  transparent);
     }
   }
 
@@ -1064,7 +1064,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .border-accent\/50 {
-      border-color: color-mix(in oklab, var(--accent) 50%, transparent);
+      border-color: rgba( var(--accent) 50%,  transparent);
     }
   }
 
@@ -1074,7 +1074,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .border-border\/30 {
-      border-color: color-mix(in oklab, var(--border) 30%, transparent);
+      border-color: rgba( var(--border) 30%,  transparent);
     }
   }
 
@@ -1084,7 +1084,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .border-border\/50 {
-      border-color: color-mix(in oklab, var(--border) 50%, transparent);
+      border-color: rgba( var(--border) 50%,  transparent);
     }
   }
 
@@ -1102,7 +1102,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .border-primary\/30 {
-      border-color: color-mix(in oklab, var(--primary) 30%, transparent);
+      border-color: rgba( var(--primary) 30%,  transparent);
     }
   }
 
@@ -1112,7 +1112,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .border-primary\/50 {
-      border-color: color-mix(in oklab, var(--primary) 50%, transparent);
+      border-color: rgba( var(--primary) 50%,  transparent);
     }
   }
 
@@ -1122,7 +1122,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .border-secondary\/30 {
-      border-color: color-mix(in oklab, var(--secondary) 30%, transparent);
+      border-color: rgba( var(--secondary) 30%,  transparent);
     }
   }
 
@@ -1132,7 +1132,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .border-secondary\/50 {
-      border-color: color-mix(in oklab, var(--secondary) 50%, transparent);
+      border-color: rgba( var(--secondary) 50%,  transparent);
     }
   }
 
@@ -1150,7 +1150,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-accent\/10 {
-      background-color: color-mix(in oklab, var(--accent) 10%, transparent);
+      background-color: rgba( var(--accent) 10%,  transparent);
     }
   }
 
@@ -1160,7 +1160,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-accent\/15 {
-      background-color: color-mix(in oklab, var(--accent) 15%, transparent);
+      background-color: rgba( var(--accent) 15%,  transparent);
     }
   }
 
@@ -1170,7 +1170,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-accent\/20 {
-      background-color: color-mix(in oklab, var(--accent) 20%, transparent);
+      background-color: rgba( var(--accent) 20%,  transparent);
     }
   }
 
@@ -1180,7 +1180,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-accent\/30 {
-      background-color: color-mix(in oklab, var(--accent) 30%, transparent);
+      background-color: rgba( var(--accent) 30%,  transparent);
     }
   }
 
@@ -1190,7 +1190,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-accent\/60 {
-      background-color: color-mix(in oklab, var(--accent) 60%, transparent);
+      background-color: rgba( var(--accent) 60%,  transparent);
     }
   }
 
@@ -1208,7 +1208,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-card\/50 {
-      background-color: color-mix(in oklab, var(--card) 50%, transparent);
+      background-color: rgba( var(--card) 50%,  transparent);
     }
   }
 
@@ -1218,7 +1218,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-card\/80 {
-      background-color: color-mix(in oklab, var(--card) 80%, transparent);
+      background-color: rgba( var(--card) 80%,  transparent);
     }
   }
 
@@ -1244,7 +1244,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-muted\/20 {
-      background-color: color-mix(in oklab, var(--muted) 20%, transparent);
+      background-color: rgba( var(--muted) 20%,  transparent);
     }
   }
 
@@ -1254,7 +1254,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-muted\/30 {
-      background-color: color-mix(in oklab, var(--muted) 30%, transparent);
+      background-color: rgba( var(--muted) 30%,  transparent);
     }
   }
 
@@ -1264,7 +1264,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-muted\/50 {
-      background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+      background-color: rgba( var(--muted) 50%,  transparent);
     }
   }
 
@@ -1278,7 +1278,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-primary\/5 {
-      background-color: color-mix(in oklab, var(--primary) 5%, transparent);
+      background-color: rgba( var(--primary) 5%,  transparent);
     }
   }
 
@@ -1288,7 +1288,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-primary\/10 {
-      background-color: color-mix(in oklab, var(--primary) 10%, transparent);
+      background-color: rgba( var(--primary) 10%,  transparent);
     }
   }
 
@@ -1298,7 +1298,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-primary\/20 {
-      background-color: color-mix(in oklab, var(--primary) 20%, transparent);
+      background-color: rgba( var(--primary) 20%,  transparent);
     }
   }
 
@@ -1312,7 +1312,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-secondary\/5 {
-      background-color: color-mix(in oklab, var(--secondary) 5%, transparent);
+      background-color: rgba( var(--secondary) 5%,  transparent);
     }
   }
 
@@ -1322,7 +1322,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-secondary\/10 {
-      background-color: color-mix(in oklab, var(--secondary) 10%, transparent);
+      background-color: rgba( var(--secondary) 10%,  transparent);
     }
   }
 
@@ -1332,22 +1332,22 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .bg-secondary\/20 {
-      background-color: color-mix(in oklab, var(--secondary) 20%, transparent);
+      background-color: rgba( var(--secondary) 20%,  transparent);
     }
   }
 
   .bg-gradient-to-b {
-    --tw-gradient-position: to bottom in oklab;
+    --tw-gradient-position: to bottom;
     background-image: linear-gradient(var(--tw-gradient-stops));
   }
 
   .bg-gradient-to-br {
-    --tw-gradient-position: to bottom right in oklab;
+    --tw-gradient-position: to bottom right;
     background-image: linear-gradient(var(--tw-gradient-stops));
   }
 
   .bg-gradient-to-r {
-    --tw-gradient-position: to right in oklab;
+    --tw-gradient-position: to right;
     background-image: linear-gradient(var(--tw-gradient-stops));
   }
 
@@ -1358,7 +1358,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .from-background\/50 {
-      --tw-gradient-from: color-mix(in oklab, var(--background) 50%, transparent);
+      --tw-gradient-from: rgba( var(--background) 50%,  transparent);
     }
   }
 
@@ -1374,7 +1374,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .from-primary\/5 {
-      --tw-gradient-from: color-mix(in oklab, var(--primary) 5%, transparent);
+      --tw-gradient-from: rgba( var(--primary) 5%,  transparent);
     }
   }
 
@@ -1385,7 +1385,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .from-primary\/10 {
-      --tw-gradient-from: color-mix(in oklab, var(--primary) 10%, transparent);
+      --tw-gradient-from: rgba( var(--primary) 10%,  transparent);
     }
   }
 
@@ -1396,7 +1396,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .from-primary\/20 {
-      --tw-gradient-from: color-mix(in oklab, var(--primary) 20%, transparent);
+      --tw-gradient-from: rgba( var(--primary) 20%,  transparent);
     }
   }
 
@@ -1408,7 +1408,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .via-background\/80 {
-      --tw-gradient-via: color-mix(in oklab, var(--background) 80%, transparent);
+      --tw-gradient-via: rgba( var(--background) 80%,  transparent);
     }
   }
 
@@ -1426,7 +1426,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .via-secondary\/10 {
-      --tw-gradient-via: color-mix(in oklab, var(--secondary) 10%, transparent);
+      --tw-gradient-via: rgba( var(--secondary) 10%,  transparent);
     }
   }
 
@@ -1448,7 +1448,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .to-accent\/10 {
-      --tw-gradient-to: color-mix(in oklab, var(--accent) 10%, transparent);
+      --tw-gradient-to: rgba( var(--accent) 10%,  transparent);
     }
   }
 
@@ -1469,7 +1469,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .to-secondary\/10 {
-      --tw-gradient-to: color-mix(in oklab, var(--secondary) 10%, transparent);
+      --tw-gradient-to: rgba( var(--secondary) 10%,  transparent);
     }
   }
 
@@ -1480,7 +1480,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .to-secondary\/20 {
-      --tw-gradient-to: color-mix(in oklab, var(--secondary) 20%, transparent);
+      --tw-gradient-to: rgba( var(--secondary) 20%,  transparent);
     }
   }
 
@@ -1701,7 +1701,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .text-foreground\/90 {
-      color: color-mix(in oklab, var(--foreground) 90%, transparent);
+      color: rgba( var(--foreground) 90%,  transparent);
     }
   }
 
@@ -1903,7 +1903,7 @@
 
     @supports (color: color-mix(in lab, red, red)) {
       .hover\:border-primary\/30:hover {
-        border-color: color-mix(in oklab, var(--primary) 30%, transparent);
+        border-color: rgba( var(--primary) 30%,  transparent);
       }
     }
   }
@@ -1915,7 +1915,7 @@
 
     @supports (color: color-mix(in lab, red, red)) {
       .hover\:border-primary\/50:hover {
-        border-color: color-mix(in oklab, var(--primary) 50%, transparent);
+        border-color: rgba( var(--primary) 50%,  transparent);
       }
     }
   }
@@ -1933,7 +1933,7 @@
 
     @supports (color: color-mix(in lab, red, red)) {
       .hover\:bg-destructive\/90:hover {
-        background-color: color-mix(in oklab, var(--destructive) 90%, transparent);
+        background-color: rgba( var(--destructive) 90%,  transparent);
       }
     }
   }
@@ -1951,7 +1951,7 @@
 
     @supports (color: color-mix(in lab, red, red)) {
       .hover\:bg-primary\/10:hover {
-        background-color: color-mix(in oklab, var(--primary) 10%, transparent);
+        background-color: rgba( var(--primary) 10%,  transparent);
       }
     }
   }
@@ -1963,7 +1963,7 @@
 
     @supports (color: color-mix(in lab, red, red)) {
       .hover\:bg-primary\/90:hover {
-        background-color: color-mix(in oklab, var(--primary) 90%, transparent);
+        background-color: rgba( var(--primary) 90%,  transparent);
       }
     }
   }
@@ -1975,7 +1975,7 @@
 
     @supports (color: color-mix(in lab, red, red)) {
       .hover\:bg-secondary\/80:hover {
-        background-color: color-mix(in oklab, var(--secondary) 80%, transparent);
+        background-color: rgba( var(--secondary) 80%,  transparent);
       }
     }
   }
@@ -2013,7 +2013,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .focus-visible\:ring-destructive\/20:focus-visible {
-      --tw-ring-color: color-mix(in oklab, var(--destructive) 20%, transparent);
+      --tw-ring-color: rgba( var(--destructive) 20%,  transparent);
     }
   }
 
@@ -2023,7 +2023,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .focus-visible\:ring-ring\/50:focus-visible {
-      --tw-ring-color: color-mix(in oklab, var(--ring) 50%, transparent);
+      --tw-ring-color: rgba( var(--ring) 50%,  transparent);
     }
   }
 
@@ -2074,7 +2074,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .aria-invalid\:ring-destructive\/20[aria-invalid="true"] {
-      --tw-ring-color: color-mix(in oklab, var(--destructive) 20%, transparent);
+      --tw-ring-color: rgba( var(--destructive) 20%,  transparent);
     }
   }
 
@@ -2204,7 +2204,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .dark\:bg-destructive\/60:is(.dark *) {
-      background-color: color-mix(in oklab, var(--destructive) 60%, transparent);
+      background-color: rgba( var(--destructive) 60%,  transparent);
     }
   }
 
@@ -2214,7 +2214,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .dark\:bg-input\/30:is(.dark *) {
-      background-color: color-mix(in oklab, var(--input) 30%, transparent);
+      background-color: rgba( var(--input) 30%,  transparent);
     }
   }
 
@@ -2229,7 +2229,7 @@
 
     @supports (color: color-mix(in lab, red, red)) {
       .dark\:hover\:bg-accent\/50:is(.dark *):hover {
-        background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+        background-color: rgba( var(--accent) 50%,  transparent);
       }
     }
   }
@@ -2241,7 +2241,7 @@
 
     @supports (color: color-mix(in lab, red, red)) {
       .dark\:hover\:bg-input\/50:is(.dark *):hover {
-        background-color: color-mix(in oklab, var(--input) 50%, transparent);
+        background-color: rgba( var(--input) 50%,  transparent);
       }
     }
   }
@@ -2252,7 +2252,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .dark\:focus-visible\:ring-destructive\/40:is(.dark *):focus-visible {
-      --tw-ring-color: color-mix(in oklab, var(--destructive) 40%, transparent);
+      --tw-ring-color: rgba( var(--destructive) 40%,  transparent);
     }
   }
 
@@ -2262,7 +2262,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .dark\:aria-invalid\:ring-destructive\/40:is(.dark *)[aria-invalid="true"] {
-      --tw-ring-color: color-mix(in oklab, var(--destructive) 40%, transparent);
+      --tw-ring-color: rgba( var(--destructive) 40%,  transparent);
     }
   }
 
@@ -2276,7 +2276,7 @@
 
   @supports (color: color-mix(in lab, red, red)) {
     .dark\:data-\[state\=active\]\:bg-input\/30:is(.dark *)[data-state="active"] {
-      background-color: color-mix(in oklab, var(--input) 30%, transparent);
+      background-color: rgba( var(--input) 30%,  transparent);
     }
   }
 
@@ -2331,7 +2331,7 @@
 
     @supports (color: color-mix(in lab, red, red)) {
       a.\[a\&\]\:hover\:bg-destructive\/90:hover {
-        background-color: color-mix(in oklab, var(--destructive) 90%, transparent);
+        background-color: rgba( var(--destructive) 90%,  transparent);
       }
     }
   }
@@ -2343,7 +2343,7 @@
 
     @supports (color: color-mix(in lab, red, red)) {
       a.\[a\&\]\:hover\:bg-primary\/90:hover {
-        background-color: color-mix(in oklab, var(--primary) 90%, transparent);
+        background-color: rgba( var(--primary) 90%,  transparent);
       }
     }
   }
@@ -2355,7 +2355,7 @@
 
     @supports (color: color-mix(in lab, red, red)) {
       a.\[a\&\]\:hover\:bg-secondary\/90:hover {
-        background-color: color-mix(in oklab, var(--secondary) 90%, transparent);
+        background-color: rgba( var(--secondary) 90%,  transparent);
       }
     }
   }
@@ -2414,40 +2414,40 @@
 }
 
 .dark {
-  --background: oklch(.145 0 0);
-  --foreground: oklch(.985 0 0);
-  --card: oklch(.145 0 0);
-  --card-foreground: oklch(.985 0 0);
-  --popover: oklch(.145 0 0);
-  --popover-foreground: oklch(.985 0 0);
-  --primary: oklch(.985 0 0);
-  --primary-foreground: oklch(.205 0 0);
-  --secondary: oklch(.269 0 0);
-  --secondary-foreground: oklch(.985 0 0);
-  --muted: oklch(.269 0 0);
-  --muted-foreground: oklch(.708 0 0);
-  --accent: oklch(.269 0 0);
-  --accent-foreground: oklch(.985 0 0);
-  --destructive: oklch(.396 .141 25.723);
-  --destructive-foreground: oklch(.637 .237 25.331);
-  --border: oklch(.269 0 0);
-  --input: oklch(.269 0 0);
-  --ring: oklch(.439 0 0);
+  --background: transparent;
+  --foreground: transparent;
+  --card: transparent;
+  --card-foreground: transparent;
+  --popover: transparent;
+  --popover-foreground: transparent;
+  --primary: transparent;
+  --primary-foreground: transparent;
+  --secondary: transparent;
+  --secondary-foreground: transparent;
+  --muted: transparent;
+  --muted-foreground: transparent;
+  --accent: transparent;
+  --accent-foreground: transparent;
+  --destructive: transparent;
+  --destructive-foreground: transparent;
+  --border: transparent;
+  --input: transparent;
+  --ring: transparent;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --chart-1: oklch(.488 .243 264.376);
-  --chart-2: oklch(.696 .17 162.48);
-  --chart-3: oklch(.769 .188 70.08);
-  --chart-4: oklch(.627 .265 303.9);
-  --chart-5: oklch(.645 .246 16.439);
-  --sidebar: oklch(.205 0 0);
-  --sidebar-foreground: oklch(.985 0 0);
-  --sidebar-primary: oklch(.488 .243 264.376);
-  --sidebar-primary-foreground: oklch(.985 0 0);
-  --sidebar-accent: oklch(.269 0 0);
-  --sidebar-accent-foreground: oklch(.985 0 0);
-  --sidebar-border: oklch(.269 0 0);
-  --sidebar-ring: oklch(.439 0 0);
+  --chart-1: transparent;
+  --chart-2: transparent;
+  --chart-3: transparent;
+  --chart-4: transparent;
+  --chart-5: transparent;
+  --sidebar: transparent;
+  --sidebar-foreground: transparent;
+  --sidebar-primary: transparent;
+  --sidebar-primary-foreground: transparent;
+  --sidebar-accent: transparent;
+  --sidebar-accent-foreground: transparent;
+  --sidebar-border: transparent;
+  --sidebar-ring: transparent;
 }
 
 html {
@@ -2758,3 +2758,6 @@ html {
     opacity: .5;
   }
 }
+
+
+

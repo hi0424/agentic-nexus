@@ -4,6 +4,9 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Download, TrendingDown, AlertCircle, CheckCircle2, Lightbulb, Factory } from 'lucide-react';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { useState } from 'react';
 
 const failureData = [
   { component: 'Brake Pads', failures: 45, cost: 67500 },
@@ -80,6 +83,56 @@ interface ManufacturingProps {
 }
 
 export function ManufacturingInsights({ data }: ManufacturingProps) {
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleDownloadPDF = async () => {
+    if (isGenerating) return;
+    
+    setIsGenerating(true);
+    
+    try {
+      const element = document.getElementById('rca-report-content');
+      if (!element) {
+        throw new Error('Report content element not found');
+      }
+
+      // Wait for charts to render
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Simple approach: capture as rendered (no CSS parsing issues)
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        backgroundColor: '#0a0a0a',
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+        windowWidth: element.scrollWidth,
+        windowHeight: element.scrollHeight,
+      });
+
+      // Convert to image
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+      
+      // Create PDF
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: [canvas.width, canvas.height],
+      });
+
+      pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width, canvas.height, undefined, 'FAST');
+
+      // Download
+      pdf.save(`RCA_Report_${new Date().toISOString().split('T')[0]}.pdf`);
+
+    } catch (error) {
+      console.error('PDF generation error:', error);
+      alert(`Failed to generate PDF. ${error instanceof Error ? error.message : 'Please try again.'}`);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-7xl mx-auto space-y-6">
@@ -93,12 +146,18 @@ export function ManufacturingInsights({ data }: ManufacturingProps) {
             <h1 className="text-4xl mb-2 text-primary">Manufacturing Insights</h1>
             <p className="text-muted-foreground">AI-generated RCA/CAPA reports for continuous improvement</p>
           </div>
-          <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
+          <Button 
+            onClick={handleDownloadPDF}
+            disabled={isGenerating}
+            className="gap-2 bg-primary text-primary-foreground hover:bg-primary hover:opacity-90 disabled:opacity-50 transition-opacity"
+          >
             <Download className="w-4 h-4" />
-            Download RCA Report (PDF)
+            {isGenerating ? 'Generating PDF...' : 'Download RCA Report (PDF)'}
           </Button>
         </motion.div>
 
+        {/* Report Content - Wrapped for PDF generation */}
+        <div id="rca-report-content">
         {/* Top 5 Component Failures (derived from diagnosis past issues when available) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -321,6 +380,8 @@ export function ManufacturingInsights({ data }: ManufacturingProps) {
             </motion.div>
           ))}
         </div>
+        </div>
+        {/* End of Report Content */}
       </div>
     </div>
   );

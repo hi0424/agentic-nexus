@@ -124,7 +124,13 @@ agentic-nexus/
 │   ├── ueba/          # Security layer
 │   └── main.py        # FastAPI entrypoint
 ├── frontend/
-│   └── dashboard.py   # Demo dashboard
+│   ├── src/    # frontend
+│   ├── .gitignore
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── vite.config.ts
 ├── requirements.txt
 └── README.md
 ```
@@ -143,7 +149,7 @@ uvicorn backend.main:app --reload
 ```
 ```bash
 cd frontend
-streamlit run dashboard.py
+npm run dev
 ```
 ---
 
@@ -153,3 +159,4 @@ Built by a student team focused on:
 - Backend orchestration
 - Data-driven workflows
 - UX-to-engineering translation
+

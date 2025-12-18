@@ -67,7 +67,7 @@ AutoAI integrates a **UEBA-style security layer** to monitor AI agent behavior.
 - Prevents agents from accessing resources outside their scope
 
 **Demonstration scenario:**  
-For vehicle `V004`, the Scheduling Agent intentionally attempts an unauthorized telematics access, which is detected and flagged by UEBA.  
+For vehicle `V007`, the Scheduling Agent intentionally attempts an unauthorized telematics access, which is detected and flagged by UEBA.  
 All other vehicles operate under normal behavioral baselines.
 
 This demonstrates **behavior-based security**, not hardcoded alerts.
@@ -159,5 +159,6 @@ Built by a student team focused on:
 - Backend orchestration
 - Data-driven workflows
 - UX-to-engineering translation
+
 
 
